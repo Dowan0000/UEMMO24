@@ -54,9 +54,6 @@ extern C_ATTACKDefaultTypeInternal _C_ATTACK_default_instance_;
 class C_CHAT;
 struct C_CHATDefaultTypeInternal;
 extern C_CHATDefaultTypeInternal _C_CHAT_default_instance_;
-class C_DEAD;
-struct C_DEADDefaultTypeInternal;
-extern C_DEADDefaultTypeInternal _C_DEAD_default_instance_;
 class C_ENTER_GAME;
 struct C_ENTER_GAMEDefaultTypeInternal;
 extern C_ENTER_GAMEDefaultTypeInternal _C_ENTER_GAME_default_instance_;
@@ -100,7 +97,6 @@ extern S_SPAWNDefaultTypeInternal _S_SPAWN_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::C_ATTACK* Arena::CreateMaybeMessage<::Protocol::C_ATTACK>(Arena*);
 template<> ::Protocol::C_CHAT* Arena::CreateMaybeMessage<::Protocol::C_CHAT>(Arena*);
-template<> ::Protocol::C_DEAD* Arena::CreateMaybeMessage<::Protocol::C_DEAD>(Arena*);
 template<> ::Protocol::C_ENTER_GAME* Arena::CreateMaybeMessage<::Protocol::C_ENTER_GAME>(Arena*);
 template<> ::Protocol::C_LEAVE_GAME* Arena::CreateMaybeMessage<::Protocol::C_LEAVE_GAME>(Arena*);
 template<> ::Protocol::C_LOGIN* Arena::CreateMaybeMessage<::Protocol::C_LOGIN>(Arena*);
@@ -1959,163 +1955,6 @@ class S_ATTACK final :
 };
 // -------------------------------------------------------------------
 
-class C_DEAD final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.C_DEAD) */ {
- public:
-  inline C_DEAD() : C_DEAD(nullptr) {}
-  ~C_DEAD() override;
-  explicit PROTOBUF_CONSTEXPR C_DEAD(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  C_DEAD(const C_DEAD& from);
-  C_DEAD(C_DEAD&& from) noexcept
-    : C_DEAD() {
-    *this = ::std::move(from);
-  }
-
-  inline C_DEAD& operator=(const C_DEAD& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline C_DEAD& operator=(C_DEAD&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const C_DEAD& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const C_DEAD* internal_default_instance() {
-    return reinterpret_cast<const C_DEAD*>(
-               &_C_DEAD_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    12;
-
-  friend void swap(C_DEAD& a, C_DEAD& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(C_DEAD* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(C_DEAD* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  C_DEAD* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<C_DEAD>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const C_DEAD& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const C_DEAD& from) {
-    C_DEAD::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(C_DEAD* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "Protocol.C_DEAD";
-  }
-  protected:
-  explicit C_DEAD(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kInfoFieldNumber = 1,
-  };
-  // .Protocol.ObjectInfo info = 1;
-  bool has_info() const;
-  private:
-  bool _internal_has_info() const;
-  public:
-  void clear_info();
-  const ::Protocol::ObjectInfo& info() const;
-  PROTOBUF_NODISCARD ::Protocol::ObjectInfo* release_info();
-  ::Protocol::ObjectInfo* mutable_info();
-  void set_allocated_info(::Protocol::ObjectInfo* info);
-  private:
-  const ::Protocol::ObjectInfo& _internal_info() const;
-  ::Protocol::ObjectInfo* _internal_mutable_info();
-  public:
-  void unsafe_arena_set_allocated_info(
-      ::Protocol::ObjectInfo* info);
-  ::Protocol::ObjectInfo* unsafe_arena_release_info();
-
-  // @@protoc_insertion_point(class_scope:Protocol.C_DEAD)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::Protocol::ObjectInfo* info_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_Protocol_2eproto;
-};
-// -------------------------------------------------------------------
-
 class S_DEAD final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_DEAD) */ {
  public:
@@ -2164,7 +2003,7 @@ class S_DEAD final :
                &_S_DEAD_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    13;
+    12;
 
   friend void swap(S_DEAD& a, S_DEAD& b) {
     a.Swap(&b);
@@ -2321,7 +2160,7 @@ class C_CHAT final :
                &_C_CHAT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    14;
+    13;
 
   friend void swap(C_CHAT& a, C_CHAT& b) {
     a.Swap(&b);
@@ -2474,7 +2313,7 @@ class S_CHAT final :
                &_S_CHAT_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    15;
+    14;
 
   friend void swap(S_CHAT& a, S_CHAT& b) {
     a.Swap(&b);
@@ -3351,95 +3190,6 @@ inline void S_ATTACK::set_rest_hp(float value) {
 
 // -------------------------------------------------------------------
 
-// C_DEAD
-
-// .Protocol.ObjectInfo info = 1;
-inline bool C_DEAD::_internal_has_info() const {
-  return this != internal_default_instance() && _impl_.info_ != nullptr;
-}
-inline bool C_DEAD::has_info() const {
-  return _internal_has_info();
-}
-inline const ::Protocol::ObjectInfo& C_DEAD::_internal_info() const {
-  const ::Protocol::ObjectInfo* p = _impl_.info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::ObjectInfo&>(
-      ::Protocol::_ObjectInfo_default_instance_);
-}
-inline const ::Protocol::ObjectInfo& C_DEAD::info() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_DEAD.info)
-  return _internal_info();
-}
-inline void C_DEAD::unsafe_arena_set_allocated_info(
-    ::Protocol::ObjectInfo* info) {
-  if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.info_);
-  }
-  _impl_.info_ = info;
-  if (info) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.C_DEAD.info)
-}
-inline ::Protocol::ObjectInfo* C_DEAD::release_info() {
-  
-  ::Protocol::ObjectInfo* temp = _impl_.info_;
-  _impl_.info_ = nullptr;
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
-  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) { delete old; }
-#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
-  if (GetArenaForAllocation() != nullptr) {
-    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  }
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
-  return temp;
-}
-inline ::Protocol::ObjectInfo* C_DEAD::unsafe_arena_release_info() {
-  // @@protoc_insertion_point(field_release:Protocol.C_DEAD.info)
-  
-  ::Protocol::ObjectInfo* temp = _impl_.info_;
-  _impl_.info_ = nullptr;
-  return temp;
-}
-inline ::Protocol::ObjectInfo* C_DEAD::_internal_mutable_info() {
-  
-  if (_impl_.info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::Protocol::ObjectInfo>(GetArenaForAllocation());
-    _impl_.info_ = p;
-  }
-  return _impl_.info_;
-}
-inline ::Protocol::ObjectInfo* C_DEAD::mutable_info() {
-  ::Protocol::ObjectInfo* _msg = _internal_mutable_info();
-  // @@protoc_insertion_point(field_mutable:Protocol.C_DEAD.info)
-  return _msg;
-}
-inline void C_DEAD::set_allocated_info(::Protocol::ObjectInfo* info) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
-  if (message_arena == nullptr) {
-    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.info_);
-  }
-  if (info) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
-                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(info));
-    if (message_arena != submessage_arena) {
-      info = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
-          message_arena, info, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  _impl_.info_ = info;
-  // @@protoc_insertion_point(field_set_allocated:Protocol.C_DEAD.info)
-}
-
-// -------------------------------------------------------------------
-
 // S_DEAD
 
 // .Protocol.ObjectInfo info = 1;
@@ -3658,8 +3408,6 @@ inline void S_CHAT::set_allocated_msg(std::string* msg) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -22,10 +22,9 @@ enum : uint16
 	PKT_S_MOVE = 1009,
 	PKT_C_ATTACK = 1010,
 	PKT_S_ATTACK = 1011,
-	PKT_C_DEAD = 1012,
-	PKT_S_DEAD = 1013,
-	PKT_C_CHAT = 1014,
-	PKT_S_CHAT = 1015,
+	PKT_S_DEAD = 1012,
+	PKT_C_CHAT = 1013,
+	PKT_S_CHAT = 1014,
 };
 
 // Custom Handlers
@@ -68,7 +67,6 @@ public:
 	static SendBufferRef MakeSendBuffer(Protocol::C_LEAVE_GAME& pkt) { return MakeSendBuffer(pkt, PKT_C_LEAVE_GAME); }
 	static SendBufferRef MakeSendBuffer(Protocol::C_MOVE& pkt) { return MakeSendBuffer(pkt, PKT_C_MOVE); }
 	static SendBufferRef MakeSendBuffer(Protocol::C_ATTACK& pkt) { return MakeSendBuffer(pkt, PKT_C_ATTACK); }
-	static SendBufferRef MakeSendBuffer(Protocol::C_DEAD& pkt) { return MakeSendBuffer(pkt, PKT_C_DEAD); }
 	static SendBufferRef MakeSendBuffer(Protocol::C_CHAT& pkt) { return MakeSendBuffer(pkt, PKT_C_CHAT); }
 
 private:

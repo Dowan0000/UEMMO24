@@ -45,6 +45,12 @@ public:
 	// get
 	Protocol::ObjectInfo* GetObjectInfo() { return ObjectInfo; };
 
+
+public:
+	UFUNCTION(BlueprintNativeEvent)
+	void DeadAnim();
+	void DeadAnim_Implementation();
+
 protected:
 	Protocol::ObjectInfo* ObjectInfo;
 

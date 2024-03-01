@@ -208,6 +208,9 @@ void US1GameInstance::HandleMove(const Protocol::S_MOVE& MovePkt)
 	if (FindMonster)
 	{
 		AS1Monster* Monster = *FindMonster;
+		if (Monster == nullptr)
+			return;
+
 		const Protocol::PosInfo& Info = MovePkt.info();
 		
 		if(Info.state() == Protocol::MoveState::MOVE_STATE_RUN)
@@ -251,5 +254,24 @@ void US1GameInstance::HandleAttack(const Protocol::S_ATTACK& AttackPkt)
 
 void US1GameInstance::HandleDead(const Protocol::S_DEAD& DeadPkt)
 {
+	if (Socket == nullptr || GameServerSession == nullptr)
+		return;
+
+	auto* World = GetWorld();
+	if (World == nullptr)
+		return;
+
+	const uint64 ObjectId = DeadPkt.info().object_id();
+	
+	// 일단 몬스터 죽는거...
+	AS1Monster** FindMonster = Monsters.Find(ObjectId);
+
+
+	// 여기서 Crash...
+	//Monsters.Remove(ObjectId);
+
+	AS1Monster* Monster = *FindMonster;
+	if(Monster)
+		Monster->DeadAnim();
 }
 

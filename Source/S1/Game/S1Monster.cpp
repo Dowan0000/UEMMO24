@@ -118,3 +118,7 @@ void AS1Monster::SetDestInfo(const Protocol::PosInfo& Info)
 	// 상태만 바로 적용하자.
 	//SetMoveState(Info.state());
 }
+
+void AS1Monster::DeadAnim_Implementation()
+{
+}
