@@ -193,7 +193,7 @@ void US1GameInstance::HandleMove(const Protocol::S_MOVE& MovePkt)
 	AS1Player** FindActor = Players.Find(ObjectId);
 	if (FindActor)
 	{
-		AS1Player* Player = (*FindActor);
+		AS1Player* Player = *FindActor;
 		if (Player->IsMyPlayer())
 			return;
 
@@ -207,7 +207,7 @@ void US1GameInstance::HandleMove(const Protocol::S_MOVE& MovePkt)
 	AS1Monster** FindMonster = Monsters.Find(ObjectId);
 	if (FindMonster)
 	{
-		AS1Monster* Monster = (*FindMonster);
+		AS1Monster* Monster = *FindMonster;
 		const Protocol::PosInfo& Info = MovePkt.info();
 		
 		if(Info.state() == Protocol::MoveState::MOVE_STATE_RUN)
@@ -222,12 +222,22 @@ void US1GameInstance::HandleMove(const Protocol::S_MOVE& MovePkt)
 
 void US1GameInstance::HandleAttack(const Protocol::S_ATTACK& AttackPkt)
 {
+	UE_LOG(LogTemp, Warning, TEXT("HandleAttack"));
+
 	if (Socket == nullptr || GameServerSession == nullptr)
 		return;
 
 	auto* World = GetWorld();
 	if (World == nullptr)
 		return;
+
+	const uint64 ObjectId = AttackPkt.info().object_id();
+	AS1Player** FindPlayer = Players.Find(ObjectId);
+	AS1Player* player = *FindPlayer;
+	player->AttackAnim();
+	//
+	//
+	//
 
 	// AttackPkt에서 몬스터 id와 rest_hp를 가져와서 적용
 	AS1Monster* monster = *Monsters.Find(AttackPkt.target());

@@ -36,6 +36,13 @@ public:
 	void SetDestInfo(const Protocol::PosInfo& Info);
 	Protocol::PosInfo* GetPlayerInfo() { return PlayerInfo; }
 
+
+public:
+	void AttackAnim();
+	/*UFUNCTION(BlueprintNativeEvent)
+	void AttackAnim();
+	virtual void AttackAnim_Implementation();*/
+
 protected:
 	class Protocol::ObjectInfo* ObjectInfo;
 	

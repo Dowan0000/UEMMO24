@@ -85,6 +85,7 @@ void AS1MyPlayer::Tick(float DeltaTime)
 		LastDesiredInput = DesiredInput;
 	}
 
+
 	// State 정보
 	if (DesiredInput == FVector2D::Zero())
 		SetMoveState(Protocol::MOVE_STATE_IDLE);
@@ -144,6 +145,7 @@ void AS1MyPlayer::Move(const FInputActionValue& Value)
 			const FVector Location = GetActorLocation();
 			FRotator Rotator = UKismetMathLibrary::FindLookAtRotation(Location, Location + DesiredMoveDirection);
 			DesiredYaw = Rotator.Yaw;
+
 		}
 	}
 }
@@ -163,6 +165,8 @@ void AS1MyPlayer::Look(const FInputActionValue& Value)
 
 void AS1MyPlayer::Attack()
 {
+	UE_LOG(LogTemp, Warning, TEXT("Attack"));
+
 	FHitResult Hit;
 	
 	FVector Start = { GetActorLocation().X, GetActorLocation().Y, GetActorLocation().Z + 70.f };
@@ -173,6 +177,8 @@ void AS1MyPlayer::Attack()
 	Params.AddIgnoredActor(GetOwner());
 
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_Camera, Params);
+
+	// 여기서 걸렸었네...
 
 	if (AS1Monster* HitActor = Cast<AS1Monster>(Hit.GetActor()))
 	{
@@ -199,7 +205,3 @@ void AS1MyPlayer::Attack()
 		SEND_PACKET(AttackPkt);
 	}
 }
-
-
-
-
