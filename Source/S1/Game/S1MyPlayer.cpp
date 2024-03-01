@@ -165,7 +165,7 @@ void AS1MyPlayer::Look(const FInputActionValue& Value)
 
 void AS1MyPlayer::Attack()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Attack"));
+	AttackAnim();
 
 	FHitResult Hit;
 	
@@ -177,16 +177,18 @@ void AS1MyPlayer::Attack()
 	Params.AddIgnoredActor(GetOwner());
 
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECollisionChannel::ECC_Camera, Params);
+	AS1Monster* HitActor = Cast<AS1Monster>(Hit.GetActor());
+	bool hit = HitActor != nullptr;
 
-	// 여기서 걸렸었네...
+	Protocol::C_ATTACK AttackPkt;
+	Protocol::ObjectInfo* Info = AttackPkt.mutable_info();
+	Info->CopyFrom(*ObjectInfo);
+	AttackPkt.set_hit(hit);
 
-	if (AS1Monster* HitActor = Cast<AS1Monster>(Hit.GetActor()))
+	if (hit)
 	{
 		FDamageEvent DamageEvent;
 		HitActor->TakeDamage(10.f, DamageEvent, GetController(), this);
-
-
-		Protocol::C_ATTACK AttackPkt;
 
 		{
 			// 플레이어 정보?
@@ -194,14 +196,18 @@ void AS1MyPlayer::Attack()
 			// 데미지정보
 
 			uint64 targetId = HitActor->GetObjectInfo()->object_id();
-			
-			Protocol::ObjectInfo* Info = AttackPkt.mutable_info();
-			Info->CopyFrom(*ObjectInfo);
 			AttackPkt.set_target(targetId);
 
-			//Info->set_state(GetMoveState());
 		}
 
 		SEND_PACKET(AttackPkt);
+		return;
 	}
+
+	SEND_PACKET(AttackPkt);
+	return;
+}
+
+void AS1MyPlayer::AttackAnim_Implementation()
+{
 }

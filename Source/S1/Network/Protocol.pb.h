@@ -1712,7 +1712,8 @@ class C_ATTACK final :
 
   enum : int {
     kInfoFieldNumber = 1,
-    kTargetFieldNumber = 2,
+    kTargetFieldNumber = 3,
+    kHitFieldNumber = 2,
   };
   // .Protocol.ObjectInfo info = 1;
   bool has_info() const;
@@ -1732,13 +1733,22 @@ class C_ATTACK final :
       ::Protocol::ObjectInfo* info);
   ::Protocol::ObjectInfo* unsafe_arena_release_info();
 
-  // uint64 target = 2;
+  // uint64 target = 3;
   void clear_target();
   uint64_t target() const;
   void set_target(uint64_t value);
   private:
   uint64_t _internal_target() const;
   void _internal_set_target(uint64_t value);
+  public:
+
+  // bool hit = 2;
+  void clear_hit();
+  bool hit() const;
+  void set_hit(bool value);
+  private:
+  bool _internal_hit() const;
+  void _internal_set_hit(bool value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.C_ATTACK)
@@ -1751,6 +1761,7 @@ class C_ATTACK final :
   struct Impl_ {
     ::Protocol::ObjectInfo* info_;
     uint64_t target_;
+    bool hit_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1880,8 +1891,9 @@ class S_ATTACK final :
 
   enum : int {
     kInfoFieldNumber = 1,
-    kTargetFieldNumber = 2,
-    kRestHpFieldNumber = 3,
+    kTargetFieldNumber = 3,
+    kHitFieldNumber = 2,
+    kRestHpFieldNumber = 4,
   };
   // .Protocol.ObjectInfo info = 1;
   bool has_info() const;
@@ -1901,7 +1913,7 @@ class S_ATTACK final :
       ::Protocol::ObjectInfo* info);
   ::Protocol::ObjectInfo* unsafe_arena_release_info();
 
-  // uint64 target = 2;
+  // uint64 target = 3;
   void clear_target();
   uint64_t target() const;
   void set_target(uint64_t value);
@@ -1910,7 +1922,16 @@ class S_ATTACK final :
   void _internal_set_target(uint64_t value);
   public:
 
-  // float rest_hp = 3;
+  // bool hit = 2;
+  void clear_hit();
+  bool hit() const;
+  void set_hit(bool value);
+  private:
+  bool _internal_hit() const;
+  void _internal_set_hit(bool value);
+  public:
+
+  // float rest_hp = 4;
   void clear_rest_hp();
   float rest_hp() const;
   void set_rest_hp(float value);
@@ -1929,6 +1950,7 @@ class S_ATTACK final :
   struct Impl_ {
     ::Protocol::ObjectInfo* info_;
     uint64_t target_;
+    bool hit_;
     float rest_hp_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -3138,7 +3160,27 @@ inline void C_ATTACK::set_allocated_info(::Protocol::ObjectInfo* info) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_ATTACK.info)
 }
 
-// uint64 target = 2;
+// bool hit = 2;
+inline void C_ATTACK::clear_hit() {
+  _impl_.hit_ = false;
+}
+inline bool C_ATTACK::_internal_hit() const {
+  return _impl_.hit_;
+}
+inline bool C_ATTACK::hit() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_ATTACK.hit)
+  return _internal_hit();
+}
+inline void C_ATTACK::_internal_set_hit(bool value) {
+  
+  _impl_.hit_ = value;
+}
+inline void C_ATTACK::set_hit(bool value) {
+  _internal_set_hit(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_ATTACK.hit)
+}
+
+// uint64 target = 3;
 inline void C_ATTACK::clear_target() {
   _impl_.target_ = uint64_t{0u};
 }
@@ -3247,7 +3289,27 @@ inline void S_ATTACK::set_allocated_info(::Protocol::ObjectInfo* info) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_ATTACK.info)
 }
 
-// uint64 target = 2;
+// bool hit = 2;
+inline void S_ATTACK::clear_hit() {
+  _impl_.hit_ = false;
+}
+inline bool S_ATTACK::_internal_hit() const {
+  return _impl_.hit_;
+}
+inline bool S_ATTACK::hit() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_ATTACK.hit)
+  return _internal_hit();
+}
+inline void S_ATTACK::_internal_set_hit(bool value) {
+  
+  _impl_.hit_ = value;
+}
+inline void S_ATTACK::set_hit(bool value) {
+  _internal_set_hit(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_ATTACK.hit)
+}
+
+// uint64 target = 3;
 inline void S_ATTACK::clear_target() {
   _impl_.target_ = uint64_t{0u};
 }
@@ -3267,7 +3329,7 @@ inline void S_ATTACK::set_target(uint64_t value) {
   // @@protoc_insertion_point(field_set:Protocol.S_ATTACK.target)
 }
 
-// float rest_hp = 3;
+// float rest_hp = 4;
 inline void S_ATTACK::clear_rest_hp() {
   _impl_.rest_hp_ = 0;
 }

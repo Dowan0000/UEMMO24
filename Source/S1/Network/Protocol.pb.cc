@@ -152,6 +152,7 @@ PROTOBUF_CONSTEXPR C_ATTACK::C_ATTACK(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.info_)*/nullptr
   , /*decltype(_impl_.target_)*/uint64_t{0u}
+  , /*decltype(_impl_.hit_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct C_ATTACKDefaultTypeInternal {
   PROTOBUF_CONSTEXPR C_ATTACKDefaultTypeInternal()
@@ -166,6 +167,7 @@ PROTOBUF_CONSTEXPR S_ATTACK::S_ATTACK(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.info_)*/nullptr
   , /*decltype(_impl_.target_)*/uint64_t{0u}
+  , /*decltype(_impl_.hit_)*/false
   , /*decltype(_impl_.rest_hp_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct S_ATTACKDefaultTypeInternal {
@@ -312,6 +314,7 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_ATTACK, _impl_.info_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_ATTACK, _impl_.hit_),
   PROTOBUF_FIELD_OFFSET(::Protocol::C_ATTACK, _impl_.target_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_ATTACK, _internal_metadata_),
@@ -320,6 +323,7 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_ATTACK, _impl_.info_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_ATTACK, _impl_.hit_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_ATTACK, _impl_.target_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_ATTACK, _impl_.rest_hp_),
   ~0u,  // no _has_bits_
@@ -364,11 +368,11 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 55, -1, -1, sizeof(::Protocol::C_MOVE)},
   { 62, -1, -1, sizeof(::Protocol::S_MOVE)},
   { 69, -1, -1, sizeof(::Protocol::C_ATTACK)},
-  { 77, -1, -1, sizeof(::Protocol::S_ATTACK)},
-  { 86, -1, -1, sizeof(::Protocol::C_DEAD)},
-  { 93, -1, -1, sizeof(::Protocol::S_DEAD)},
-  { 100, -1, -1, sizeof(::Protocol::C_CHAT)},
-  { 107, -1, -1, sizeof(::Protocol::S_CHAT)},
+  { 78, -1, -1, sizeof(::Protocol::S_ATTACK)},
+  { 88, -1, -1, sizeof(::Protocol::C_DEAD)},
+  { 95, -1, -1, sizeof(::Protocol::S_DEAD)},
+  { 102, -1, -1, sizeof(::Protocol::C_CHAT)},
+  { 109, -1, -1, sizeof(::Protocol::S_CHAT)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -402,14 +406,15 @@ const char descriptor_table_protodef_Protocol_2eproto[] PROTOBUF_SECTION_VARIABL
   "\"\037\n\tS_DESPAWN\022\022\n\nobject_ids\030\001 \003(\004\")\n\006C_M"
   "OVE\022\037\n\004info\030\001 \001(\0132\021.Protocol.PosInfo\")\n\006"
   "S_MOVE\022\037\n\004info\030\001 \001(\0132\021.Protocol.PosInfo\""
-  ">\n\010C_ATTACK\022\"\n\004info\030\001 \001(\0132\024.Protocol.Obj"
-  "ectInfo\022\016\n\006target\030\002 \001(\004\"O\n\010S_ATTACK\022\"\n\004i"
-  "nfo\030\001 \001(\0132\024.Protocol.ObjectInfo\022\016\n\006targe"
-  "t\030\002 \001(\004\022\017\n\007rest_hp\030\003 \001(\002\",\n\006C_DEAD\022\"\n\004in"
-  "fo\030\001 \001(\0132\024.Protocol.ObjectInfo\",\n\006S_DEAD"
-  "\022\"\n\004info\030\001 \001(\0132\024.Protocol.ObjectInfo\"\025\n\006"
-  "C_CHAT\022\013\n\003msg\030\001 \001(\t\"\'\n\006S_CHAT\022\020\n\010playerI"
-  "d\030\001 \001(\004\022\013\n\003msg\030\002 \001(\tb\006proto3"
+  "K\n\010C_ATTACK\022\"\n\004info\030\001 \001(\0132\024.Protocol.Obj"
+  "ectInfo\022\013\n\003hit\030\002 \001(\010\022\016\n\006target\030\003 \001(\004\"\\\n\010"
+  "S_ATTACK\022\"\n\004info\030\001 \001(\0132\024.Protocol.Object"
+  "Info\022\013\n\003hit\030\002 \001(\010\022\016\n\006target\030\003 \001(\004\022\017\n\007res"
+  "t_hp\030\004 \001(\002\",\n\006C_DEAD\022\"\n\004info\030\001 \001(\0132\024.Pro"
+  "tocol.ObjectInfo\",\n\006S_DEAD\022\"\n\004info\030\001 \001(\013"
+  "2\024.Protocol.ObjectInfo\"\025\n\006C_CHAT\022\013\n\003msg\030"
+  "\001 \001(\t\"\'\n\006S_CHAT\022\020\n\010playerId\030\001 \001(\004\022\013\n\003msg"
+  "\030\002 \001(\tb\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Protocol_2eproto_deps[2] = {
   &::descriptor_table_Enum_2eproto,
@@ -417,7 +422,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_Protocol_2eproto_de
 };
 static ::_pbi::once_flag descriptor_table_Protocol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
-    false, false, 748, descriptor_table_protodef_Protocol_2eproto,
+    false, false, 774, descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
     &descriptor_table_Protocol_2eproto_once, descriptor_table_Protocol_2eproto_deps, 2, 16,
     schemas, file_default_instances, TableStruct_Protocol_2eproto::offsets,
@@ -1983,13 +1988,16 @@ C_ATTACK::C_ATTACK(const C_ATTACK& from)
   new (&_impl_) Impl_{
       decltype(_impl_.info_){nullptr}
     , decltype(_impl_.target_){}
+    , decltype(_impl_.hit_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_info()) {
     _this->_impl_.info_ = new ::Protocol::ObjectInfo(*from._impl_.info_);
   }
-  _this->_impl_.target_ = from._impl_.target_;
+  ::memcpy(&_impl_.target_, &from._impl_.target_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.hit_) -
+    reinterpret_cast<char*>(&_impl_.target_)) + sizeof(_impl_.hit_));
   // @@protoc_insertion_point(copy_constructor:Protocol.C_ATTACK)
 }
 
@@ -2000,6 +2008,7 @@ inline void C_ATTACK::SharedCtor(
   new (&_impl_) Impl_{
       decltype(_impl_.info_){nullptr}
     , decltype(_impl_.target_){uint64_t{0u}}
+    , decltype(_impl_.hit_){false}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -2032,7 +2041,9 @@ void C_ATTACK::Clear() {
     delete _impl_.info_;
   }
   _impl_.info_ = nullptr;
-  _impl_.target_ = uint64_t{0u};
+  ::memset(&_impl_.target_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.hit_) -
+      reinterpret_cast<char*>(&_impl_.target_)) + sizeof(_impl_.hit_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -2050,9 +2061,17 @@ const char* C_ATTACK::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx)
         } else
           goto handle_unusual;
         continue;
-      // uint64 target = 2;
+      // bool hit = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.hit_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint64 target = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
           _impl_.target_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
@@ -2094,10 +2113,16 @@ uint8_t* C_ATTACK::_InternalSerialize(
         _Internal::info(this).GetCachedSize(), target, stream);
   }
 
-  // uint64 target = 2;
+  // bool hit = 2;
+  if (this->_internal_hit() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_hit(), target);
+  }
+
+  // uint64 target = 3;
   if (this->_internal_target() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_target(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(3, this->_internal_target(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2123,9 +2148,14 @@ size_t C_ATTACK::ByteSizeLong() const {
         *_impl_.info_);
   }
 
-  // uint64 target = 2;
+  // uint64 target = 3;
   if (this->_internal_target() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_target());
+  }
+
+  // bool hit = 2;
+  if (this->_internal_hit() != 0) {
+    total_size += 1 + 1;
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -2153,6 +2183,9 @@ void C_ATTACK::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTO
   if (from._internal_target() != 0) {
     _this->_internal_set_target(from._internal_target());
   }
+  if (from._internal_hit() != 0) {
+    _this->_internal_set_hit(from._internal_hit());
+  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -2171,8 +2204,8 @@ void C_ATTACK::InternalSwap(C_ATTACK* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(C_ATTACK, _impl_.target_)
-      + sizeof(C_ATTACK::_impl_.target_)
+      PROTOBUF_FIELD_OFFSET(C_ATTACK, _impl_.hit_)
+      + sizeof(C_ATTACK::_impl_.hit_)
       - PROTOBUF_FIELD_OFFSET(C_ATTACK, _impl_.info_)>(
           reinterpret_cast<char*>(&_impl_.info_),
           reinterpret_cast<char*>(&other->_impl_.info_));
@@ -2213,6 +2246,7 @@ S_ATTACK::S_ATTACK(const S_ATTACK& from)
   new (&_impl_) Impl_{
       decltype(_impl_.info_){nullptr}
     , decltype(_impl_.target_){}
+    , decltype(_impl_.hit_){}
     , decltype(_impl_.rest_hp_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -2233,6 +2267,7 @@ inline void S_ATTACK::SharedCtor(
   new (&_impl_) Impl_{
       decltype(_impl_.info_){nullptr}
     , decltype(_impl_.target_){uint64_t{0u}}
+    , decltype(_impl_.hit_){false}
     , decltype(_impl_.rest_hp_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -2286,17 +2321,25 @@ const char* S_ATTACK::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx)
         } else
           goto handle_unusual;
         continue;
-      // uint64 target = 2;
+      // bool hit = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.hit_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint64 target = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
           _impl_.target_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // float rest_hp = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
+      // float rest_hp = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
           _impl_.rest_hp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
@@ -2338,20 +2381,26 @@ uint8_t* S_ATTACK::_InternalSerialize(
         _Internal::info(this).GetCachedSize(), target, stream);
   }
 
-  // uint64 target = 2;
-  if (this->_internal_target() != 0) {
+  // bool hit = 2;
+  if (this->_internal_hit() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_target(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_hit(), target);
   }
 
-  // float rest_hp = 3;
+  // uint64 target = 3;
+  if (this->_internal_target() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(3, this->_internal_target(), target);
+  }
+
+  // float rest_hp = 4;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_rest_hp = this->_internal_rest_hp();
   uint32_t raw_rest_hp;
   memcpy(&raw_rest_hp, &tmp_rest_hp, sizeof(tmp_rest_hp));
   if (raw_rest_hp != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_rest_hp(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_rest_hp(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -2377,12 +2426,17 @@ size_t S_ATTACK::ByteSizeLong() const {
         *_impl_.info_);
   }
 
-  // uint64 target = 2;
+  // uint64 target = 3;
   if (this->_internal_target() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_target());
   }
 
-  // float rest_hp = 3;
+  // bool hit = 2;
+  if (this->_internal_hit() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // float rest_hp = 4;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_rest_hp = this->_internal_rest_hp();
   uint32_t raw_rest_hp;
@@ -2415,6 +2469,9 @@ void S_ATTACK::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTO
   }
   if (from._internal_target() != 0) {
     _this->_internal_set_target(from._internal_target());
+  }
+  if (from._internal_hit() != 0) {
+    _this->_internal_set_hit(from._internal_hit());
   }
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_rest_hp = from._internal_rest_hp();

@@ -163,8 +163,6 @@ void AS1Player::SetDestInfo(const Protocol::PosInfo& Info)
 	SetMoveState(Info.state());
 }
 
-void AS1Player::AttackAnim()
+void AS1Player::AttackAnim_Implementation()
 {
-	UE_LOG(LogTemp, Warning, TEXT("AttackAnim In C++"));
-	Jump();
 }

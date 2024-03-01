@@ -38,10 +38,9 @@ public:
 
 
 public:
+	UFUNCTION(BlueprintNativeEvent)
 	void AttackAnim();
-	/*UFUNCTION(BlueprintNativeEvent)
-	void AttackAnim();
-	virtual void AttackAnim_Implementation();*/
+	virtual void AttackAnim_Implementation();
 
 protected:
 	class Protocol::ObjectInfo* ObjectInfo;

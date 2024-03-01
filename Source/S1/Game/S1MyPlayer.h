@@ -35,6 +35,7 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	void Attack();
+	virtual void AttackAnim_Implementation() override;
 
 protected:
 	/** Camera boom positioning the camera behind the character */

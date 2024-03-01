@@ -222,8 +222,6 @@ void US1GameInstance::HandleMove(const Protocol::S_MOVE& MovePkt)
 
 void US1GameInstance::HandleAttack(const Protocol::S_ATTACK& AttackPkt)
 {
-	UE_LOG(LogTemp, Warning, TEXT("HandleAttack"));
-
 	if (Socket == nullptr || GameServerSession == nullptr)
 		return;
 
@@ -233,18 +231,22 @@ void US1GameInstance::HandleAttack(const Protocol::S_ATTACK& AttackPkt)
 
 	const uint64 ObjectId = AttackPkt.info().object_id();
 	AS1Player** FindPlayer = Players.Find(ObjectId);
-	AS1Player* player = *FindPlayer;
-	player->AttackAnim();
-	//
-	//
-	//
+	AS1Player* Player = *FindPlayer;
+	if (!Player->IsMyPlayer())
+		Player->AttackAnim();
+	
+	bool hit = AttackPkt.hit();
 
-	// AttackPkt에서 몬스터 id와 rest_hp를 가져와서 적용
-	AS1Monster* monster = *Monsters.Find(AttackPkt.target());
-	monster->SetHealth(AttackPkt.rest_hp());
+	if (hit)
+	{
+		// AttackPkt에서 몬스터 id와 rest_hp를 가져와서 적용
+		AS1Monster* monster = *Monsters.Find(AttackPkt.target());
+		monster->SetHealth(AttackPkt.rest_hp());
 
-	UE_LOG(LogTemp, Warning, TEXT("MonsterID : %d, Rest_HP : %f"), AttackPkt.target(), AttackPkt.rest_hp());
-
+		UE_LOG(LogTemp, Warning, TEXT("MonsterID : %d, Rest_HP : %f"), AttackPkt.target(), AttackPkt.rest_hp());
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("MonsterID : %d, Rest_HP : %f"), AttackPkt.target(), AttackPkt.rest_hp()));
+	}
+	
 }
 
 void US1GameInstance::HandleDead(const Protocol::S_DEAD& DeadPkt)
