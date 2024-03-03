@@ -67,4 +67,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float Damage;
 
+	bool TooFar;
+
 };

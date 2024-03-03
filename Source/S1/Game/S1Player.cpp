@@ -89,11 +89,11 @@ void AS1Player::Tick(float DeltaSeconds)
 		const float DistToDest = MoveDir.Length();
 		MoveDir.Normalize();
 
-		float MoveDist = (MoveDir * 600.f * DeltaSeconds).Length();
+		float MoveDist = (MoveDir * 500.f * DeltaSeconds).Length();
 		MoveDist = FMath::Min(MoveDist, DistToDest);
 		FVector NextLocation = Location + MoveDir* MoveDist;
 
-		SetActorLocation(NextLocation);
+		//SetActorLocation(NextLocation);
 
 		const Protocol::MoveState State = PlayerInfo->state();
 
@@ -101,7 +101,23 @@ void AS1Player::Tick(float DeltaSeconds)
 		{
 			MoveState = EMoveState::MSI_Run;
 			SetActorRotation(FRotator(0, DestInfo->yaw(), 0));
-			//AddMovementInput(GetActorForwardVector());
+			
+			AddMovementInput(GetActorForwardVector());
+
+			/*if (50.f <= (Location - DestLocation).Length())
+				SetActorLocation(NextLocation);*/
+			if (100.f <= (Location - DestLocation).Length() || TooFar)
+			{
+				TooFar = true;
+				SetActorLocation(NextLocation);
+				//UE_LOG(LogTemp, Warning, TEXT("TooFar"));
+			}
+			if ((Location - DestLocation).Length() <= 10.f)
+			{
+				TooFar = false;
+				//UE_LOG(LogTemp, Warning, TEXT("Dist under 10.f"));
+			}
+				
 		}
 		else
 		{
