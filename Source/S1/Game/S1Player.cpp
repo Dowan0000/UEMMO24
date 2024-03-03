@@ -13,7 +13,8 @@
 #include "S1MyPlayer.h"
 
 AS1Player::AS1Player() :
-	Health(100.f), MaxHealth(100.f), Damage(10.f)
+	Health(100.f), MaxHealth(100.f), Damage(10.f),
+	MoveState(EMoveState::MSI_Idle)
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -81,7 +82,7 @@ void AS1Player::Tick(float DeltaSeconds)
 
 	if (IsMyPlayer() == false)
 	{
-		/*FVector Location = GetActorLocation();
+		FVector Location = GetActorLocation();
 		FVector DestLocation = FVector(DestInfo->x(), DestInfo->y(), DestInfo->z());
 
 		FVector MoveDir = (DestLocation - Location);
@@ -92,17 +93,19 @@ void AS1Player::Tick(float DeltaSeconds)
 		MoveDist = FMath::Min(MoveDist, DistToDest);
 		FVector NextLocation = Location + MoveDir* MoveDist;
 
-		SetActorLocation(NextLocation);*/
+		SetActorLocation(NextLocation);
+
 		const Protocol::MoveState State = PlayerInfo->state();
 
 		if (State == Protocol::MOVE_STATE_RUN)
 		{
+			MoveState = EMoveState::MSI_Run;
 			SetActorRotation(FRotator(0, DestInfo->yaw(), 0));
-			AddMovementInput(GetActorForwardVector());
+			//AddMovementInput(GetActorForwardVector());
 		}
 		else
 		{
-
+			MoveState = EMoveState::MSI_Idle;
 		}
 	}
 }

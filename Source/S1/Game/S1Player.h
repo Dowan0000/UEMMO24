@@ -8,6 +8,13 @@
 #include "Protocol.pb.h"
 #include "S1Player.generated.h"
 
+UENUM(BlueprintType)
+enum class EMoveState : uint8
+{
+	MSI_Idle UMETA(DisplayName = "Idle"),
+	MSI_Run UMETA(DisplayName = "Run"),
+};
+
 UCLASS()
 class S1_API AS1Player : public ACharacter
 {
@@ -47,6 +54,9 @@ protected:
 	
 	class Protocol::PosInfo* PlayerInfo; // 현재 위치
 	class Protocol::PosInfo* DestInfo; // 목적지
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MoveState")
+	EMoveState MoveState;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float Health;
