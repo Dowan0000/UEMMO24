@@ -165,6 +165,11 @@ void AS1MyPlayer::Look(const FInputActionValue& Value)
 
 void AS1MyPlayer::Attack()
 {
+	if (bIsAttacking)
+		return;
+
+	bIsAttacking = true;
+
 	AttackAnim();
 
 	FHitResult Hit;

@@ -69,4 +69,7 @@ protected:
 
 	bool TooFar;
 
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	bool bIsAttacking;
 };
