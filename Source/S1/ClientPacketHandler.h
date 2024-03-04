@@ -22,9 +22,10 @@ enum : uint16
 	PKT_S_MOVE = 1009,
 	PKT_C_ATTACK = 1010,
 	PKT_S_ATTACK = 1011,
-	PKT_S_DEAD = 1012,
-	PKT_C_CHAT = 1013,
-	PKT_S_CHAT = 1014,
+	PKT_S_DAMAGED = 1012,
+	PKT_S_DEAD = 1013,
+	PKT_C_CHAT = 1014,
+	PKT_S_CHAT = 1015,
 };
 
 // Custom Handlers
@@ -36,6 +37,7 @@ bool Handle_S_SPAWN(PacketSessionRef& session, Protocol::S_SPAWN& pkt);
 bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
 bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
 bool Handle_S_ATTACK(PacketSessionRef& session, Protocol::S_ATTACK& pkt);
+bool Handle_S_DAMAGED(PacketSessionRef& session, Protocol::S_DAMAGED& pkt);
 bool Handle_S_DEAD(PacketSessionRef& session, Protocol::S_DEAD& pkt);
 bool Handle_S_CHAT(PacketSessionRef& session, Protocol::S_CHAT& pkt);
 
@@ -53,6 +55,7 @@ public:
 		GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_DESPAWN>(Handle_S_DESPAWN, session, buffer, len); };
 		GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_MOVE>(Handle_S_MOVE, session, buffer, len); };
 		GPacketHandler[PKT_S_ATTACK] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_ATTACK>(Handle_S_ATTACK, session, buffer, len); };
+		GPacketHandler[PKT_S_DAMAGED] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_DAMAGED>(Handle_S_DAMAGED, session, buffer, len); };
 		GPacketHandler[PKT_S_DEAD] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_DEAD>(Handle_S_DEAD, session, buffer, len); };
 		GPacketHandler[PKT_S_CHAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_CHAT>(Handle_S_CHAT, session, buffer, len); };
 	}

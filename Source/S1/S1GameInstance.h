@@ -43,6 +43,8 @@ public:
 
 	void HandleAttack(const Protocol::S_ATTACK& AttackPkt);
 
+	void HandleDamaged(const Protocol::S_DAMAGED& DamagedPkt);
+
 	void HandleDead(const Protocol::S_DEAD& DeadPkt);
 
 public:

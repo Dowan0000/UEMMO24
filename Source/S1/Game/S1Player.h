@@ -43,6 +43,7 @@ public:
 	void SetDestInfo(const Protocol::PosInfo& Info);
 	Protocol::PosInfo* GetPlayerInfo() { return PlayerInfo; }
 
+	void SetHealth(float newHealth) { Health = newHealth; };
 
 public:
 	UFUNCTION(BlueprintNativeEvent)

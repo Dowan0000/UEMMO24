@@ -89,6 +89,15 @@ bool Handle_S_ATTACK(PacketSessionRef& session, Protocol::S_ATTACK& pkt)
 	return true;
 }
 
+bool Handle_S_DAMAGED(PacketSessionRef& session, Protocol::S_DAMAGED& pkt)
+{
+	if (auto* GameInstance = Cast<US1GameInstance>(GWorld->GetGameInstance()))
+	{
+		GameInstance->HandleDamaged(pkt);
+	}
+	return true;
+}
+
 bool Handle_S_DEAD(PacketSessionRef& session, Protocol::S_DEAD& pkt)
 {
 	if (auto* GameInstance = Cast<US1GameInstance>(GWorld->GetGameInstance()))

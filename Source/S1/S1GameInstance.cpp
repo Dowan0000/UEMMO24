@@ -252,6 +252,42 @@ void US1GameInstance::HandleAttack(const Protocol::S_ATTACK& AttackPkt)
 	
 }
 
+void US1GameInstance::HandleDamaged(const Protocol::S_DAMAGED& DamagedPkt)
+{
+	if (Socket == nullptr || GameServerSession == nullptr)
+		return;
+
+	auto* World = GetWorld();
+	if (World == nullptr)
+		return;
+
+	// player는 데미지를 입는다
+	const uint64 PlayerId = DamagedPkt.pinfo().object_id();
+	AS1Player** FindPlayer = Players.Find(PlayerId);
+	AS1Player* Player = nullptr;
+	if (FindPlayer)
+		Player = *FindPlayer;
+	else
+		UE_LOG(LogTemp, Warning, TEXT("Find Player nullptr"));
+	if(Player)
+		Player->SetHealth(DamagedPkt.pinfo().hp());
+	else
+		UE_LOG(LogTemp, Warning, TEXT("Player nullptr"));
+
+	// monster는 공격 모션
+	const uint64 MonsterId = DamagedPkt.minfo().object_id();
+	AS1Monster** FindMonster = Monsters.Find(MonsterId);
+	AS1Monster* Monster = nullptr;
+	if(FindMonster)
+		Monster = *FindMonster;
+	else
+		UE_LOG(LogTemp, Warning, TEXT("Find Monster nullptr"));
+	if(Monster)
+		Monster->AttackAnim();
+	else
+		UE_LOG(LogTemp, Warning, TEXT("Monster nullptr"));
+}
+
 void US1GameInstance::HandleDead(const Protocol::S_DEAD& DeadPkt)
 {
 	if (Socket == nullptr || GameServerSession == nullptr)

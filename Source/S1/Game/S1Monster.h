@@ -48,6 +48,10 @@ public:
 
 public:
 	UFUNCTION(BlueprintNativeEvent)
+	void AttackAnim();
+	void AttackAnim_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent)
 	void DeadAnim();
 	void DeadAnim_Implementation();
 

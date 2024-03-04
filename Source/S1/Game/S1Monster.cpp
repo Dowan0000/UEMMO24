@@ -119,6 +119,10 @@ void AS1Monster::SetDestInfo(const Protocol::PosInfo& Info)
 	//SetMoveState(Info.state());
 }
 
+void AS1Monster::AttackAnim_Implementation()
+{
+}
+
 void AS1Monster::DeadAnim_Implementation()
 {
 }
