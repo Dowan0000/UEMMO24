@@ -51,7 +51,16 @@ AS1Monster::~AS1Monster()
 void AS1Monster::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	{
+		FVector Location = GetActorLocation();
+		DestInfo->set_x(Location.X);
+		DestInfo->set_y(Location.Y);
+		DestInfo->set_z(Location.Z);
+		DestInfo->set_yaw(GetControlRotation().Yaw);
+
+		//SetMoveState(Protocol::MOVE_STATE_IDLE);
+	}
 }
 
 // Called every frame
@@ -78,6 +87,47 @@ void AS1Monster::Tick(float DeltaTime)
 		AddMovementInput(GetActorForwardVector());
 	}
 	
+	//FVector Location = GetActorLocation();
+	//FVector DestLocation = FVector(DestInfo->x(), DestInfo->y(), DestInfo->z());
+
+	//FVector MoveDir = (DestLocation - Location);
+	//const float DistToDest = MoveDir.Length();
+	//MoveDir.Normalize();
+
+	//float MoveDist = (MoveDir * 500.f * DeltaTime).Length();
+	//MoveDist = FMath::Min(MoveDist, DistToDest);
+	//FVector NextLocation = Location + MoveDir * MoveDist;
+
+	////SetActorLocation(NextLocation);
+
+	//const Protocol::MoveState State = MonsterInfo->state();
+
+	//if (State == Protocol::MOVE_STATE_RUN)
+	//{
+	//	MoveState = EMoveState::MSI_Run;
+	//	SetActorRotation(FRotator(0, DestInfo->yaw(), 0));
+
+	//	AddMovementInput(GetActorForwardVector());
+
+	//	/*if (50.f <= (Location - DestLocation).Length())
+	//		SetActorLocation(NextLocation);*/
+	//	if (100.f <= (Location - DestLocation).Length() || TooFar)
+	//	{
+	//		TooFar = true;
+	//		SetActorLocation(NextLocation);
+	//		//UE_LOG(LogTemp, Warning, TEXT("TooFar"));
+	//	}
+	//	if ((Location - DestLocation).Length() <= 10.f)
+	//	{
+	//		TooFar = false;
+	//		//UE_LOG(LogTemp, Warning, TEXT("Dist under 10.f"));
+	//	}
+
+	//}
+	//else
+	//{
+	//	//MoveState = EMoveState::MSI_Idle;
+	//}
 }
 
 float AS1Monster::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)

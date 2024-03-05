@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
 #include "Protocol.pb.h"
+#include "S1Player.h"
 #include "S1Monster.generated.h"
 
 
@@ -61,6 +62,9 @@ protected:
 	Protocol::PosInfo* MonsterInfo; // 현재 위치
 	Protocol::PosInfo* DestInfo; // 목적지
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MoveState")
+	EMoveState MoveState;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float Health;
 
@@ -70,4 +74,5 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	float Damage;
 
+	bool TooFar;
 };
