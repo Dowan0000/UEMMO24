@@ -13,7 +13,7 @@
 #include "S1MyPlayer.h"
 
 AS1Player::AS1Player() :
-	Health(100.f), MaxHealth(100.f), Damage(10.f),
+	Health(500.f), MaxHealth(500.f), Damage(10.f),
 	MoveState(EMoveState::MSI_Idle)
 {
 	// Set size for collision capsule
